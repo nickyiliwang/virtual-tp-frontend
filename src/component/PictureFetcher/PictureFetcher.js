@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import unsplash from "../../utils/unsplash";
+import { unsplash } from "../../utils/unsplash";
 import { SearchBar } from "./Components/SearchBar";
 import ImageList from "./Components/ImageList";
 
 export const PictureFetcher = ({ messageToSend, updateMessageToSend }) => {
   const [images, setImages] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await unsplash.get("/search/photos", {
@@ -31,7 +30,11 @@ export const PictureFetcher = ({ messageToSend, updateMessageToSend }) => {
   return (
     <div className="search-bar-container">
       <SearchBar onSubmit={onSearchSubmit} />
-      <ImageList images={images} />
+      <ImageList
+        images={images}
+        messageToSend={messageToSend}
+        updateMessageToSend={updateMessageToSend}
+      />
     </div>
   );
 };

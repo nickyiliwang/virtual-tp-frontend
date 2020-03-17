@@ -5,6 +5,9 @@ import { EmailForm } from "./component/EmailForm";
 // css
 import "./setup.css";
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   const [messageToSend, setMessageToSend] = useState({
@@ -17,6 +20,28 @@ const App = () => {
 
   const updateMessageToSend = msg => {
     setMessageToSend(msg);
+  };
+
+  const handleOnSubmitClick = () => {
+    console.log("triggered");
+    toast.success(" Virtual TP Email Sent !", {
+      autoClose: 2000,
+      position: "top-center",
+      hideProgressBar: true,
+      pauseOnHover: false
+    });
+
+    // axios
+    //   .post("https://glacial-earth-86841.herokuapp.com/send", messageToSend)
+    //   .then(res => {
+    //     toast(" ✔ Virtual TP Email Sent !", {
+    //       autoClose: 1500,
+    //       position: "top-center",
+    //       hideProgressBar: true,
+    //       pauseOnHover: false
+    //     });
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   return (
@@ -35,6 +60,7 @@ const App = () => {
           <EmailForm
             messageToSend={messageToSend}
             updateMessageToSend={updateMessageToSend}
+            handleOnSubmitClick={handleOnSubmitClick}
           />
         </div>
         <div className="right">
@@ -45,6 +71,7 @@ const App = () => {
           />
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 };

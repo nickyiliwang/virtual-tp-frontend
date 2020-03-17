@@ -16,7 +16,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EmailForm = ({ messageToSend, updateMessageToSend }) => {
+export const EmailForm = ({
+  messageToSend,
+  updateMessageToSend,
+  handleOnSubmitClick
+}) => {
   const handleOnChange = e => {
     const { name, value } = e.target;
     const setNewMessageToSend = { ...messageToSend, [name]: value };
@@ -33,7 +37,7 @@ export const EmailForm = ({ messageToSend, updateMessageToSend }) => {
           <Grid item>
             <EmailIcon color="primary" />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={9}>
             <TextField
               label="From:"
               type="email"
@@ -49,7 +53,7 @@ export const EmailForm = ({ messageToSend, updateMessageToSend }) => {
           <Grid item>
             <EmailIcon color="secondary" />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={9}>
             <TextField
               label="To:"
               type="email"
@@ -107,6 +111,7 @@ export const EmailForm = ({ messageToSend, updateMessageToSend }) => {
               className={classes.button}
               endIcon={<SendIcon />}
               fullWidth
+              onClick={() => handleOnSubmitClick()}
             >
               Send
             </Button>

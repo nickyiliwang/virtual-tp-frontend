@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const ImageList = ({ images }) => {
+const ImageList = ({ images, messageToSend, updateMessageToSend }) => {
   const [renderSingleImage, setRenderSingleImage] = useState(false);
   const [clickedImage, setClickedImage] = useState("");
 
@@ -11,6 +11,8 @@ const ImageList = ({ images }) => {
   const onImageSelected = e => {
     setClickedImage(e.target.src);
     setRenderSingleImage(!renderSingleImage);
+    const newMessageToSend = { ...messageToSend, image: e.target.src };
+    updateMessageToSend(newMessageToSend);
   };
 
   return images.length ? (
