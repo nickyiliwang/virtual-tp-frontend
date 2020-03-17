@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import EmailIcon from "@material-ui/icons/Email";
 import SubjectIcon from "@material-ui/icons/Subject";
 import MessageIcon from "@material-ui/icons/Message";
+import Button from "@material-ui/core/Button";
+import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -91,6 +93,23 @@ export const EmailForm = ({ messageToSend, updateMessageToSend }) => {
               placeholder={`Dear aunt Martha,\n\nEverything will be okay, we love you and we are all thinking of you during this time. Sending virtual hugs and love!\n\nSarah`}
               onChange={handleOnChange}
             />
+          </Grid>
+        </Grid>
+        {/* Send */}
+        <Grid container spacing={2} alignItems="flex-end" margin="normal">
+          <Grid item>
+            <SendIcon color="action" />
+          </Grid>
+          <Grid item xs={9}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              endIcon={<SendIcon />}
+              fullWidth
+            >
+              Send
+            </Button>
           </Grid>
         </Grid>
       </div>
