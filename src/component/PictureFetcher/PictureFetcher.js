@@ -4,7 +4,7 @@ import "./PictureFetcher.css";
 import SearchBar from "./Components/SearchBar";
 import ImageList from "./Components/ImageList";
 
-class PictureFetcherIndex extends React.Component {
+class PictureFetcher extends React.Component {
   state = {
     imageArr: []
   };
@@ -28,4 +28,4 @@ class PictureFetcherIndex extends React.Component {
   }
 }
 
-export default PictureFetcherIndex;
+export default PictureFetcher;
