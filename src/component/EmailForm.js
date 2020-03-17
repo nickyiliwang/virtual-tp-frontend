@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+
+import EmailIcon from "@material-ui/icons/Email";
 import SubjectIcon from "@material-ui/icons/Subject";
 import MessageIcon from "@material-ui/icons/Message";
 
@@ -14,23 +15,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const EmailForm = () => {
-  const classes = useStyles();
+  const [messageToSend, setMessageToSend] = useState({
+    to: "",
+    from: "",
+    subject: "",
+    text: ""
+  });
 
+  const classes = useStyles();
   return (
     <div>
       <div className={classes.margin}>
         {/* From */}
         <Grid container spacing={2} alignItems="flex-end">
           <Grid item>
-            <AccountCircle color="primary" />
+            <EmailIcon color="primary" />
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="input-with-icon-grid"
-              label="Email from:"
+              label="From:"
               autoComplete
               type="email"
-              name="from" 
+              name="from"
+              placeholder="Sarah@gmail.com"
               fullWidth
             />
           </Grid>
@@ -38,15 +46,16 @@ export const EmailForm = () => {
         {/* To */}
         <Grid container spacing={2} alignItems="flex-end">
           <Grid item>
-            <AccountCircle color="secondary" />
+            <EmailIcon color="secondary" />
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="input-with-icon-grid"
-              label="Email to:"
+              label="To:"
               autoComplete
               type="email"
               name="to"
+              placeholder="Aunt-Martha@gmail.com"
               fullWidth
             />
           </Grid>
@@ -62,12 +71,13 @@ export const EmailForm = () => {
               label="Subject:"
               autoComplete
               type="text"
+              placeholder="Hi aunt it's your niece Sarah"
               name="subject"
               fullWidth
             />
           </Grid>
         </Grid>
-        {/* subject */}
+        {/* message */}
         <Grid container spacing={2} alignItems="flex-end" margin="normal">
           <Grid item>
             <MessageIcon color="action" />
@@ -79,10 +89,11 @@ export const EmailForm = () => {
               name="message"
               multiline
               rows="10"
-              placeholder=''
+              placeholder=""
               variant="outlined"
               margin="normal"
               fullWidth
+              placeholder={`Dear aunt Martha,\n\nEverything will be okay, we love you and we are all thinking of you during this time. Sending virtual hugs and love!\n\nSarah`}
             />
           </Grid>
         </Grid>
