@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import unsplash from "../../utils/unsplash";
-import "./PictureFetcher.css";
 import { SearchBar } from "./Components/SearchBar";
 import ImageList from "./Components/ImageList";
 
@@ -30,7 +29,7 @@ export const PictureFetcher = ({ messageToSend, updateMessageToSend }) => {
   };
 
   return (
-    <div id="search-bar-container" className="ui container">
+    <div className="search-bar-container">
       <SearchBar onSubmit={onSearchSubmit} />
       <ImageList images={images} />
     </div>

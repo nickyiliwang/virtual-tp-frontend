@@ -35,8 +35,8 @@ export const SearchBar = ({ onSubmit }) => {
       <Paper component="form" className={classes.root} onSubmit={onFormSubmit}>
         <InputBase
           className={classes.input}
-          placeholder="Search For Images"
-          inputProps={{ "aria-label": "Search For Images" }}
+          placeholder="Search for images"
+          inputProps={{ "aria-label": "Search for images" }}
           onChange={e => setTerm(e.target.value)}
           value={term}
           type="text"

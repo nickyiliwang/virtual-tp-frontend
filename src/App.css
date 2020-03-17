@@ -28,6 +28,11 @@ h1::before {
   transform: translateX(-300px);
 }
 
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
 p {
   font-size: 25px;
   text-align: center;
@@ -48,4 +53,61 @@ p {
 
 .content-container {
   display: flex;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.image-container {
+  overflow: hidden;
+}
+
+img:hover {
+  transform: scale(1.4);
+}
+
+.image-list {
+  margin-top: 20px;
+  /* Prevent vertical gaps */
+  line-height: 0;
+
+  -webkit-column-count: 4;
+  -webkit-column-gap: 0px;
+  -moz-column-count: 4;
+  -moz-column-gap: 0px;
+  column-count: 4;
+  column-gap: 0px;
+}
+
+@media (max-width: 1200px) {
+  .image-list {
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
+  }
+}
+@media (max-width: 1000px) {
+  .image-list {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
+}
+@media (max-width: 800px) {
+  .image-list {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+  }
+}
+@media (max-width: 400px) {
+  .image-list {
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    column-count: 1;
+  }
 }
