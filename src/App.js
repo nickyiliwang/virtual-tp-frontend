@@ -38,7 +38,7 @@ const App = () => {
           />
         </div>
         <div className="right">
-          <h2>STEP 2: Search and select an image you would like to attach </h2>
+          <h2>STEP 2: Search and select an image to attach </h2>
           <PictureFetcher
             messageToSend={messageToSend}
             updateMessageToSend={updateMessageToSend}
