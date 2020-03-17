@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -14,13 +14,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EmailForm = () => {
-  const [messageToSend, setMessageToSend] = useState({
-    to: "",
-    from: "",
-    subject: "",
-    text: ""
-  });
+export const EmailForm = ({ messageToSend, updateMessageToSend }) => {
+  const handleOnChange = e => {
+    const { name, value } = e.target;
+    const setNewMessageToSend = { ...messageToSend, [name]: value };
+
+    updateMessageToSend(setNewMessageToSend);
+  };
 
   const classes = useStyles();
   return (
@@ -33,13 +33,12 @@ export const EmailForm = () => {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id="input-with-icon-grid"
               label="From:"
-              autoComplete
               type="email"
               name="from"
               placeholder="Sarah@gmail.com"
               fullWidth
+              onChange={handleOnChange}
             />
           </Grid>
         </Grid>
@@ -50,13 +49,12 @@ export const EmailForm = () => {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id="input-with-icon-grid"
               label="To:"
-              autoComplete
               type="email"
               name="to"
               placeholder="Aunt-Martha@gmail.com"
               fullWidth
+              onChange={handleOnChange}
             />
           </Grid>
         </Grid>
@@ -67,13 +65,12 @@ export const EmailForm = () => {
           </Grid>
           <Grid item xs={9}>
             <TextField
-              id="input-with-icon-grid"
               label="Subject:"
-              autoComplete
               type="text"
               placeholder="Hi aunt it's your niece Sarah"
               name="subject"
               fullWidth
+              onChange={handleOnChange}
             />
           </Grid>
         </Grid>
@@ -84,16 +81,15 @@ export const EmailForm = () => {
           </Grid>
           <Grid item xs={9}>
             <TextField
-              id="input-with-icon-grid"
               label="Message:"
-              name="message"
+              name="text"
               multiline
               rows="10"
-              placeholder=""
               variant="outlined"
               margin="normal"
               fullWidth
               placeholder={`Dear aunt Martha,\n\nEverything will be okay, we love you and we are all thinking of you during this time. Sending virtual hugs and love!\n\nSarah`}
+              onChange={handleOnChange}
             />
           </Grid>
         </Grid>

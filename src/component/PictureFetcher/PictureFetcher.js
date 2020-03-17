@@ -1,31 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import unsplash from "../../utils/unsplash";
 import "./PictureFetcher.css";
 import SearchBar from "./Components/SearchBar";
 import ImageList from "./Components/ImageList";
 
-class PictureFetcher extends React.Component {
-  state = {
-    imageArr: []
-  };
+export const PictureFetcher = ({ messageToSend, updateMessageToSend }) => {
+  const [images, setImages] = useState([]);
 
-  onSearchSubmit = async term => {
+  const onSearchSubmit = async (term = "toilet paper") => {
     const response = await unsplash.get("/search/photos", {
       params: {
         query: term
       }
     });
-    this.setState({ imageArr: response.data.results });
+    setImages(response.data.results);
   };
 
-  render() {
-    return (
-      <div id="search-bar-container" className="ui container">
-        <SearchBar onSubmit={this.onSearchSubmit} />
-        <ImageList images={this.state.imageArr} />
-      </div>
-    );
-  }
-}
-
-export default PictureFetcher;
+  return (
+    <div id="search-bar-container" className="ui container">
+      <SearchBar onSubmit={onSearchSubmit} />
+      <ImageList images={images} />
+    </div>
+  );
+};

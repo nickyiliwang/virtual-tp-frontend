@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 // components
-import PictureFetcher from "./component/PictureFetcher/PictureFetcher";
+import { PictureFetcher } from "./component/PictureFetcher/PictureFetcher";
 import { EmailForm } from "./component/EmailForm";
 // css
 import "./setup.css";
 import "./App.css";
 
 const App = () => {
+  const [messageToSend, setMessageToSend] = useState({
+    to: "",
+    from: "",
+    subject: "",
+    text: "",
+    image: ""
+  });
+
+  const updateMessageToSend = msg => {
+    setMessageToSend(msg);
+  };
+
   return (
     <main className="wrapper">
       <h1> Welcome to Virtual TP !</h1>
@@ -20,11 +32,17 @@ const App = () => {
       <div className="content-container">
         <div className="left">
           <h2>STEP 1: Enter your Email and Message</h2>
-          <EmailForm />
+          <EmailForm
+            messageToSend={messageToSend}
+            updateMessageToSend={updateMessageToSend}
+          />
         </div>
         <div className="right">
           <h2>STEP 2: Search and select an image you would like to attach </h2>
-          <PictureFetcher />
+          <PictureFetcher
+            messageToSend={messageToSend}
+            updateMessageToSend={updateMessageToSend}
+          />
         </div>
       </div>
     </main>
