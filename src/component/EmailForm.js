@@ -1,9 +1,7 @@
 import React from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-
 import EmailIcon from "@material-ui/icons/Email";
 import SubjectIcon from "@material-ui/icons/Subject";
 import MessageIcon from "@material-ui/icons/Message";
@@ -19,7 +17,8 @@ const useStyles = makeStyles(theme => ({
 export const EmailForm = ({
   messageToSend,
   updateMessageToSend,
-  handleOnSubmitClick
+  handleOnSubmitClick,
+  isDisabled
 }) => {
   const handleOnChange = e => {
     const { name, value } = e.target;
@@ -45,6 +44,8 @@ export const EmailForm = ({
               placeholder="Sarah@gmail.com"
               fullWidth
               onChange={handleOnChange}
+              autoFocus
+              value={messageToSend.from}
             />
           </Grid>
         </Grid>
@@ -61,6 +62,7 @@ export const EmailForm = ({
               placeholder="Aunt-Martha@gmail.com"
               fullWidth
               onChange={handleOnChange}
+              value={messageToSend.to}
             />
           </Grid>
         </Grid>
@@ -77,6 +79,7 @@ export const EmailForm = ({
               name="subject"
               fullWidth
               onChange={handleOnChange}
+              value={messageToSend.subject}
             />
           </Grid>
         </Grid>
@@ -96,6 +99,7 @@ export const EmailForm = ({
               fullWidth
               placeholder={`Dear aunt Martha,\n\nEverything will be okay, we love you and we are all thinking of you during this time. Sending virtual hugs and love!\n\nSarah`}
               onChange={handleOnChange}
+              value={messageToSend.text}
             />
           </Grid>
         </Grid>
@@ -105,6 +109,7 @@ export const EmailForm = ({
             <SendIcon color="action" />
           </Grid>
           <Grid item xs={9}>
+            <h2>STEP 3: Review and send it off!</h2>
             <Button
               variant="contained"
               color="primary"
@@ -112,6 +117,7 @@ export const EmailForm = ({
               endIcon={<SendIcon />}
               fullWidth
               onClick={() => handleOnSubmitClick()}
+              disabled={isDisabled}
             >
               Send
             </Button>

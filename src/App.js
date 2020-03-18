@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // components
 import { PictureFetcher } from "./component/PictureFetcher/PictureFetcher";
 import { EmailForm } from "./component/EmailForm";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 // css
 import "./setup.css";
 import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
+// axios
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   const [messageToSend, setMessageToSend] = useState({
@@ -17,18 +18,31 @@ const App = () => {
     text: "",
     image: ""
   });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    const errorHandling = () => {
+      const isEmpty = Object.values(messageToSend).map(val => val === "");
+
+      if (isEmpty.filter(val => val === true).length === 0) {
+        setIsButtonDisabled(false);
+      }
+    };
+    errorHandling();
+    console.log(messageToSend)
+  }, [messageToSend]);
 
   const updateMessageToSend = msg => {
     setMessageToSend(msg);
   };
 
   const handleOnSubmitClick = () => {
-    console.log("triggered");
-    toast.success(" Virtual TP Email Sent !", {
-      autoClose: 2000,
-      position: "top-center",
-      hideProgressBar: true,
-      pauseOnHover: false
+    const MySwal = withReactContent(Swal);
+    MySwal.fire({
+      title: "Message sent!",
+      // text: "Copyright 2018",
+      icon: "success",
+      showCancelButton: true
     });
 
     // axios
@@ -42,6 +56,15 @@ const App = () => {
     //     });
     //   })
     //   .catch(err => console.log(err));
+
+    setMessageToSend({
+      to: "",
+      from: "",
+      subject: "",
+      text: "",
+      image: ""
+    });
+    setIsButtonDisabled(true);
   };
 
   return (
@@ -61,6 +84,7 @@ const App = () => {
             messageToSend={messageToSend}
             updateMessageToSend={updateMessageToSend}
             handleOnSubmitClick={handleOnSubmitClick}
+            isDisabled={isButtonDisabled}
           />
         </div>
         <div className="right">
@@ -71,7 +95,6 @@ const App = () => {
           />
         </div>
       </div>
-      <ToastContainer />
     </main>
   );
 };

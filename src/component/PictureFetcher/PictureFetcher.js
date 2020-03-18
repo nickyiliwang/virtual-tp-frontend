@@ -1,30 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { unsplash } from "../../utils/unsplash";
 import { SearchBar } from "./Components/SearchBar";
 import ImageList from "./Components/ImageList";
+import { fetchData } from "../apiCalls";
 
 export const PictureFetcher = ({ messageToSend, updateMessageToSend }) => {
   const [images, setImages] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await unsplash.get("/search/photos", {
-        params: {
-          query: "toilet paper"
-        }
-      });
-      setImages(response.data.results);
-    };
-
-    fetchData();
+    fetchData("toilet paper").then(res => {
+      setImages(res);
+    });
   }, []);
 
-  const onSearchSubmit = async (term = "toilet paper") => {
-    const response = await unsplash.get("/search/photos", {
-      params: {
-        query: term
-      }
+  const onSearchSubmit = async term => {
+    fetchData(term).then(res => {
+      setImages(res);
     });
-    setImages(response.data.results);
   };
 
   return (

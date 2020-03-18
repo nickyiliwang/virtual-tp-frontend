@@ -20,6 +20,7 @@ const ImageList = ({ images, messageToSend, updateMessageToSend }) => {
       {renderSingleImage ? (
         <div className="single-image-container" onClick={onImageSelected}>
           <img src={clickedImage} alt="selected" />
+          <p>You have selected this image, click to go back</p>
         </div>
       ) : (
         images.map(image => (
