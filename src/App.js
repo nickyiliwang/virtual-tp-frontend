@@ -29,7 +29,6 @@ const App = () => {
       }
     };
     errorHandling();
-    console.log(messageToSend)
   }, [messageToSend]);
 
   const updateMessageToSend = msg => {
@@ -38,33 +37,26 @@ const App = () => {
 
   const handleOnSubmitClick = () => {
     const MySwal = withReactContent(Swal);
-    MySwal.fire({
-      title: "Message sent!",
-      // text: "Copyright 2018",
-      icon: "success",
-      showCancelButton: true
-    });
 
-    // axios
-    //   .post("https://glacial-earth-86841.herokuapp.com/send", messageToSend)
-    //   .then(res => {
-    //     toast(" ✔ Virtual TP Email Sent !", {
-    //       autoClose: 1500,
-    //       position: "top-center",
-    //       hideProgressBar: true,
-    //       pauseOnHover: false
-    //     });
-    //   })
-    //   .catch(err => console.log(err));
+    axios
+      .post("https://glacial-earth-86841.herokuapp.com/send", messageToSend)
+      .then(res => {
+        MySwal.fire({
+          title: "Message sent!",
+          icon: "success",
+          showCancelButton: true
+        });
 
-    setMessageToSend({
-      to: "",
-      from: "",
-      subject: "",
-      text: "",
-      image: ""
-    });
-    setIsButtonDisabled(true);
+        setMessageToSend({
+          to: "",
+          from: "",
+          subject: "",
+          text: "",
+          image: ""
+        });
+        setIsButtonDisabled(true);
+      })
+      .catch(err => console.error(err));
   };
 
   return (
